@@ -26,7 +26,8 @@ public class HUD : MonoBehaviour
                 mySlider.value = curExp / maxExp;                
                 break;
             case InfoType.Level:
-                myText.text = string.Format("Lv.{0:F0}.", GameManager.instance.level); // Format: 각 숫자 인자값을 지정된 형태의 문자열로 만들어주는 함수
+                myText.text = string.Format("Lv.{0:F0}.", GameManager.instance.level); 
+                // Format: 각 숫자 인자값을 지정된 형태의 문자열로 만들어주는 함수 // 0은 인덱스 번호
                 break;
             case InfoType.Kill:
                 myText.text = string.Format("{0:F0}.", GameManager.instance.kill);

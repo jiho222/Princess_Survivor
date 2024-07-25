@@ -35,10 +35,15 @@ public class GameManager : MonoBehaviour
         isLive = true; //임시
     }
 
+    void Start() // 캐릭터선택 없앨 시 새로 추가되어야할 코드
+    {
+        health = maxHealth;
+    }
+
     // public void GameStart(int id)
     // {
     //     playerId = id;
-    //     health = maxHealth;
+    //     health = maxHealth; << 위에 있다
 
     //     player.gameObject.SetActive(true);
     //     uiLevelUp.Select(playerId % 2); // 캐릭터 늘어나면 기본무기 지급이 안될 수 있기 때문에 2로 나눈 나머지
