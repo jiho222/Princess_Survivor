@@ -30,11 +30,9 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate() // 플레이어 추적, (+Hit상태일시 멈춤)
     {
-        if (!GameManager.instance.isLive) {
-            Debug.Log("Game is not live");
-        
+        if (!GameManager.instance.isLive)
             return;
-        }
+
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) 
                         // Hit 애니메이션이 실행중이면 멈춤 // 화살표이름이아닌 상태의이름
             return;      
@@ -61,7 +59,7 @@ public class Enemy : MonoBehaviour
         isLive = true;
         coll.enabled = true;
         rigid.simulated = true;
-        // spriter.sortingOrder = 2;
+        spriter.sortingOrder = 2;
         anim.SetBool("isDead", false);
         health = maxhealth;
     }
@@ -92,8 +90,8 @@ public class Enemy : MonoBehaviour
             rigid.simulated = false;
             spriter.sortingOrder = 1;
             anim.SetBool("isDead", true);
-            // GameManager.instance.kill++;
-            // GameManager.instance.GetExp();
+            GameManager.instance.kill++;
+            GameManager.instance.GetExp();
 
             // if (GameManager.instance.isLive)
             //     AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);

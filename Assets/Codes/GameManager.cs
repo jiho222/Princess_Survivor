@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
     public int playerId;
     public float health;
     public float maxHealth = 100;
-    // public int level;
-    // public int kill;
-    // public int exp;
-    // public int[] nextExp = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+    public int level;
+    public int kill;
+    public int exp;
+    public int[] nextExp = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     [Header("# GameObject")]
     public PoolManager pool;
     public Player player;
@@ -112,19 +112,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // public void GetExp()
-    // {
-    //     if (!isLive)
-    //         return; // 게임이 끝나면 경험치 획득 불가
+    public void GetExp()
+    {
+        // if (!isLive)
+        //     return; // 게임이 끝나면 경험치 획득 불가
 
-    //     exp ++;
+        exp ++;
 
-    //     if (exp == nextExp[Mathf.Min(level, nextExp.Length -1)]) { // 레벨과 관련된 nextExp
-    //         level++;
-    //         exp = 0;
-    //         uiLevelUp.Show();
-    //     }
-    // }
+        if (exp == nextExp[Mathf.Min(level, nextExp.Length -1)]) { // 레벨과 관련된 nextExp
+            level++;
+            exp = 0;
+            // uiLevelUp.Show();
+        }
+    }
 
     // public void Stop()
     // {
