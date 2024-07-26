@@ -18,10 +18,10 @@ public class Weapon : MonoBehaviour
         player = GameManager.instance.player;
     }
 
-    void Start()
-    {
-        Init();
-    }
+    // void Start()
+    // {
+    //     Init();
+    // }
     
     void Update()
     {
@@ -51,29 +51,29 @@ public class Weapon : MonoBehaviour
         if (id ==0)
             Batch();
 
-        // player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init() // (ItemData data)
+    public void Init(ItemData data)
     {
-    //     // Basic Set
-    //     name = "Weapon " + data.itemId;
-    //     transform.parent = player.transform; // 플레이어 자식으로 설정
-    //     transform.localPosition = Vector3.zero;
+        // Basic Set
+        name = "Weapon " + data.itemId;
+        transform.parent = player.transform; // 플레이어 자식으로 설정
+        transform.localPosition = Vector3.zero;
 
-    //     // Property Set
-    //     id = data.itemId;
-    //     damage = data.baseDamage * Character.Damage;
-    //     count = data.baseCount + Character.Count;
+        // Property Set
+        id = data.itemId;
+        damage = data.baseDamage; // * Character.Damage;
+        count = data.baseCount; // + Character.Count;
 
-    //     // 프리펩 아이디는 풀링 매니저의 변수에서 찾아서 초기화
-    //     // 스크립트블 오브젝트의 독립성을 위해서 인덱스가 아닌 프리펩으로 설정
-    //     for (int index=0; index < GameManager.instance.pool.prefabs.Length; index++) {
-    //         if (data.projectile == GameManager.instance.pool.prefabs[index]) {
-    //             prefabId = index;
-    //             break;
-    //         }
-    //     }
+        // 프리펩 아이디는 풀링 매니저의 변수에서 찾아서 초기화
+        // 스크립트블 오브젝트의 독립성을 위해서 인덱스가 아닌 프리펩으로 설정
+        for (int index=0; index < GameManager.instance.pool.prefabs.Length; index++) {
+            if (data.projectile == GameManager.instance.pool.prefabs[index]) {
+                prefabId = index;
+                break;
+            }
+        }
 
         switch (id) {
             case 0:
@@ -90,8 +90,8 @@ public class Weapon : MonoBehaviour
     //     hand.spriter.sprite = data.hand;
     //     hand.gameObject.SetActive(true);
 
-    //     player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
-    //         // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
+            // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수
     }
 
     void Batch()
