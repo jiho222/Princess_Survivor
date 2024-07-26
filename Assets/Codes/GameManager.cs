@@ -45,11 +45,11 @@ public class GameManager : MonoBehaviour
 
     public void GameStart(int id)
     {
-        // playerId = id;
+        playerId = id;
         health = maxHealth;
 
         player.gameObject.SetActive(true);
-        // uiLevelUp.Select(playerId % 2); // 캐릭터 늘어나면 기본무기 지급이 안될 수 있기 때문에 2로 나눈 나머지
+        uiLevelUp.Select(playerId % 2); // 캐릭터 늘어나면 기본무기 지급이 안될 수 있기 때문에 2로 나눈 나머지
         Resume(); // 게임 시작 시 Time.timeScale = 1
 
         // AudioManager.instance.PlayBgm(true);
@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameVictoryRoutine()
     {
         isLive = false;
-        enemyCleaner.SetActive(false);
+        enemyCleaner.SetActive(true);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
         if (gameTime > maxGameTime) {
             gameTime = maxGameTime;
-        //     GameVictory();
+            GameVictory();
         }
     }
 
