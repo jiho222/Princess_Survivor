@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-// using Unity.VisualScripting;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -33,8 +33,7 @@ public class Enemy : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
-        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) 
-                        // Hit 애니메이션이 실행중이면 멈춤 // 화살표이름이아닌 상태의이름
+        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) // Hit 애니메이션이 실행중이면 멈춤 // 화살표이름이아닌 상태의이름
             return;      
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;

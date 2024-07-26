@@ -10,10 +10,8 @@ public class Hand : MonoBehaviour
 
     SpriteRenderer player;
 
-
     Vector3 leftPos = new Vector3(0.7f, 0, 0);
     Vector3 leftPosReverse = new Vector3(-0.7f, 0, 0);
-
     Vector3 rightPos = new Vector3(0.6f, 0.2f, 0);
     Vector3 rightPosReverse = new Vector3(-0.6f, 0.2f, 0);
     // Quaternion leftRot = Quaternion.Euler(0, 0, -35);

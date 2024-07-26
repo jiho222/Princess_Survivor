@@ -25,22 +25,13 @@ public class GameManager : MonoBehaviour
     public Player player;
     public LevelUp uiLevelUp;
     public Result uiResult;
-    // public Transform uiJoy;
+    public Transform uiJoy;
     public GameObject enemyCleaner;
 
     void Awake()
     {
         instance = this;
         Application.targetFrameRate = 60;
-        isLive = true; //임시
-    }
-
-    void Start() // 캐릭터선택 없앨 시 새로 추가되어야할 코드
-    {
-        health = maxHealth;
-
-        // 임시 스크립트 (첫번째 캐릭터 선택)
-        uiLevelUp.Select(0);
     }
 
     public void GameStart(int id)

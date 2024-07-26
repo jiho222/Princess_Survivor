@@ -18,11 +18,6 @@ public class Weapon : MonoBehaviour
         player = GameManager.instance.player;
     }
 
-    // void Start()
-    // {
-    //     Init();
-    // }
-    
     void Update()
     {
         if (!GameManager.instance.isLive)
@@ -45,7 +40,7 @@ public class Weapon : MonoBehaviour
 
     public void LevelUp(float damage, int count)
     {
-        this.damage = damage; // * Character.Damage;
+        this.damage = damage * Character.Damage;
         this.count += count;
 
         if (id ==0)
@@ -63,8 +58,8 @@ public class Weapon : MonoBehaviour
 
         // Property Set
         id = data.itemId;
-        damage = data.baseDamage; // * Character.Damage;
-        count = data.baseCount; // + Character.Count;
+        damage = data.baseDamage * Character.Damage;
+        count = data.baseCount + Character.Count;
 
         // 프리펩 아이디는 풀링 매니저의 변수에서 찾아서 초기화
         // 스크립트블 오브젝트의 독립성을 위해서 인덱스가 아닌 프리펩으로 설정
@@ -77,11 +72,11 @@ public class Weapon : MonoBehaviour
 
         switch (id) {
             case 0:
-                speed = 150; // * Character.WeaponSpeed;
+                speed = 150 * Character.WeaponSpeed;
                 Batch();
                 break;
             default:
-                speed = 0.5f; // * Character.WeaponRate;
+                speed = 0.5f * Character.WeaponRate;
                 break;
         }
 

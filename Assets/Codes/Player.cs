@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
 
     void OnEnable()
     {
-        // speed *= Character.Speed;
+        speed *= Character.Speed;
         anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
     }
 
@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
             return;
 
         GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
+        anim.SetTrigger("isHit");
 
         if ( GameManager.instance.health < 0) {
             for (int index = 2; index < transform.childCount; index++) {
