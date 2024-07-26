@@ -102,10 +102,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0); // Build Setting의 0번째 씬을 로드
     }
 
-    // public void GameQuit()
-    // {
-    //     Application.Quit();
-    // }
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
 
     void Update()
     {
