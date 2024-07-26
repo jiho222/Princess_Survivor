@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public Vector2 inputVec;
     public float speed; 
     public Scanner scanner;
-    // public Hand[] hands;
+    public Hand[] hands;
     // public RuntimeAnimatorController[] animCon;
 
     Rigidbody2D rigid;
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
-        // hands = GetComponentsInChildren<Hand>(true);
+        hands = GetComponentsInChildren<Hand>(true);
     }
 
     // void OnEnable()
@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+                    
         Vector2 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
     }
@@ -43,8 +46,8 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
-        // if (!GameManager.instance.isLive)
-        //     return;
+        if (!GameManager.instance.isLive)
+            return;
         
          anim.SetFloat("Speed", inputVec.magnitude); // magnitude는 벡터의 순수한 크기 값
 
@@ -53,20 +56,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    // void OnCollisionStay2D (Collision2D collision)
-    // {
-    //     if (!GameManager.instance.isLive)
-    //         return;
+    void OnCollisionStay2D (Collision2D collision)
+    {
+        if (!GameManager.instance.isLive)
+            return;
 
-    //     GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
+        GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
 
-    //     if ( GameManager.instance.health < 0) {
-    //         for (int index = 2; index < transform.childCount; index++) {
-    //             transform.GetChild(index).gameObject.SetActive(false);
-    //         }
+        if ( GameManager.instance.health < 0) {
+            for (int index = 2; index < transform.childCount; index++) {
+                transform.GetChild(index).gameObject.SetActive(false);
+            }
 
-    //         anim.SetTrigger("Dead");
-    //         GameManager.instance.GameOver();
-    //     }
-    // }
+            anim.SetTrigger("isDead");
+            GameManager.instance.GameOver();
+        }
+    }
 }

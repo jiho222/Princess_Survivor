@@ -25,8 +25,8 @@ public class Weapon : MonoBehaviour
     
     void Update()
     {
-        // if (!GameManager.instance.isLive)
-        //     return;
+        if (!GameManager.instance.isLive)
+            return;
             
         switch (id) {
             case 0:
@@ -85,10 +85,10 @@ public class Weapon : MonoBehaviour
                 break;
         }
 
-    //     // Hand Set
-    //     Hand hand = player.hands[(int)data.itemType];
-    //     hand.spriter.sprite = data.hand;
-    //     hand.gameObject.SetActive(true);
+        // Hand Set
+        Hand hand = player.hands[(int)data.itemType];
+        hand.spriter.sprite = data.hand;
+        hand.gameObject.SetActive(true);
 
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
             // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수
