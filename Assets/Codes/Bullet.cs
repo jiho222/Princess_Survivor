@@ -24,9 +24,9 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision) // 맞을때마다 per을 감소시킨다
     {
-        if (!collision.CompareTag("Enemy") || per == -100)
+        if (!collision.CompareTag("Enemy") || per == -100) // Enemy에 닿은게 아니거나 per이 -100(근접무기)가 아닐경우에
             return;
 
         per --;
@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision) // 밖으로 나가면 총알 삭제
     {
         if (!collision.CompareTag("Area") || per == -100)
             return;

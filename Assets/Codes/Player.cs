@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public Hand[] hands;
     public RuntimeAnimatorController[] animCon;
 
+    public float pickupRange = 1.5f;
+
     Rigidbody2D rigid;
     SpriteRenderer spriter;
     Animator anim;
@@ -24,13 +26,13 @@ public class Player : MonoBehaviour
         hands = GetComponentsInChildren<Hand>(true);
     }
 
-    void OnEnable()
+    void OnEnable() // 캐릭터를 실행
     {
         speed *= Character.Speed;
         anim.runtimeAnimatorController = animCon[GameManager.instance.playerId];
     }
 
-    void FixedUpdate()
+    void FixedUpdate() // 이동
     {
         if (!GameManager.instance.isLive)
             return;
@@ -39,12 +41,12 @@ public class Player : MonoBehaviour
         rigid.MovePosition(rigid.position + nextVec);
     }
 
-    void OnMove(InputValue value)
+    void OnMove(InputValue value) // Input 받음
     {
         inputVec = value.Get<Vector2>();
     }
 
-    void LateUpdate()
+    void LateUpdate() // 이동, 좌우반전
     {
         if (!GameManager.instance.isLive)
             return;
@@ -56,7 +58,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D (Collision2D collision)
+    void OnCollisionStay2D (Collision2D collision) // 피격
     {
         if (!GameManager.instance.isLive)
             return;

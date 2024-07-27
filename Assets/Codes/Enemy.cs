@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
         isLive = true;
         coll.enabled = true;
         rigid.simulated = true;
-        spriter.sortingOrder = 2;
+        spriter.sortingOrder = 3;
         anim.SetBool("isDead", false);
         health = maxhealth;
     }
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
         health = data.health;
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision) // 맞으면 피깍임, 넉백, 사망
     {
         if (!collision.CompareTag("Bullet") || !isLive)
             return;
@@ -87,14 +87,16 @@ public class Enemy : MonoBehaviour
             isLive = false;
             coll.enabled = false;
             rigid.simulated = false;
-            spriter.sortingOrder = 1;
+            spriter.sortingOrder = 2;
             anim.SetBool("isDead", true);
             GameManager.instance.kill++;
-            GameManager.instance.GetExp();
+            StartCoroutine(ExpDrop());
 
             // if (GameManager.instance.isLive)
             //     AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
         }
+
+        DamageNumberController.instance.SpawnDamage(collision.GetComponent<Bullet>().damage, transform.position);
     }
 
     IEnumerator KnockBack()
@@ -105,8 +107,17 @@ public class Enemy : MonoBehaviour
         rigid.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse); // Impulse: 즉발적인 힘을 가함
     }
 
-    void Dead() // 애니메이션이 실행시켜준다
+    IEnumerator ExpDrop()
     {
+        GameObject exppoint = transform.Find("ExpPoint").gameObject;
+        exppoint.transform.SetParent(null);
+        exppoint.SetActive(true);
+        yield return new WaitForSeconds(2); // 4초 기다림
         gameObject.SetActive(false);
+    }
+
+    void Dead() // 애니메이션이 실행시켜준다 // 오류로 실행 안됨
+    {
+        // gameObject.SetActive(false);
     }
 }

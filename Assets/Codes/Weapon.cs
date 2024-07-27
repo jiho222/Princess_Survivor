@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
             // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수
     }
 
-    void Batch()
+    void Batch() // 근접무기 설정
     {
         for (int index = 0; index < count; index++) {
             Transform bullet;
@@ -113,7 +113,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    void Fire()
+    void Fire() // 원거리무기 설정
     {
         if (!player.scanner.nearestTarget)
             return;

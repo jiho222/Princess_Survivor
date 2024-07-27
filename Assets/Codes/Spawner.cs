@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour
         // 120초에 몬스터 6개면 20초마다 단계 업
     }
     
-    void Update()
+    void Update() // levelTime 에 맞게 spawnTime 에 맞게 Spawn
     {
         if (!GameManager.instance.isLive)
             return;

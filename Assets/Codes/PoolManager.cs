@@ -19,7 +19,7 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public GameObject Get(int index)
+    public GameObject Get(int index) // 비활성화된 오브젝트 접근해서 할당
     {
         GameObject select = null;
 
