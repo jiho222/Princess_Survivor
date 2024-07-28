@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
         GameObject exppoint = transform.Find("ExpPoint").gameObject;
         exppoint.transform.SetParent(null);
         exppoint.SetActive(true);
-        yield return new WaitForSeconds(2); // 4초 기다림
+        yield return new WaitForSeconds(2); // 2초 기다림
         gameObject.SetActive(false);
     }
 

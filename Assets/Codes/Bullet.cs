@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
         this.per = per;
 
         if (per >= 0) {
-            rigid.velocity = dir * 15f;
+            rigid.velocity = dir * 15f; // 총알 발사
         }
     }
 

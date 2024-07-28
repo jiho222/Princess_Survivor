@@ -11,10 +11,12 @@ public class Player : MonoBehaviour
     public Hand[] hands;
     public RuntimeAnimatorController[] animCon;
 
-    public float pickupRange = 1.5f;
+    public float pickupRange = 10f;
+
+    public SpriteRenderer spriter;
 
     Rigidbody2D rigid;
-    SpriteRenderer spriter;
+    
     Animator anim;
 
     void Awake()

@@ -40,7 +40,17 @@ public class GameManager : MonoBehaviour
         health = maxHealth;
 
         player.gameObject.SetActive(true);
-        uiLevelUp.Select(playerId % 2); // 캐릭터 늘어나면 기본무기 지급이 안될 수 있기 때문에 2로 나눈 나머지
+        // uiLevelUp.Select(playerId % 2); // 캐릭터 늘어나면 기본무기 지급이 안될 수 있기 때문에 2로 나눈 나머지
+
+        if (playerId == 0)
+        {
+            uiLevelUp.Select(1);
+        }
+        else if (playerId == 1)
+        {
+            uiLevelUp.Select(5);
+        }        
+
         Resume(); // 게임 시작 시 Time.timeScale = 1
 
         // AudioManager.instance.PlayBgm(true);

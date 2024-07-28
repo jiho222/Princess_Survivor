@@ -9,7 +9,7 @@ public class AchieveManager : MonoBehaviour
     public GameObject[] unlockCharacter;
     public GameObject uiNotice;
 
-    enum Achive { UnlockPotato, UnlockBean }
+    enum Achive { UnlockP1 }
     Achive[] achives;
     WaitForSecondsRealtime wait;
 
@@ -24,7 +24,7 @@ public class AchieveManager : MonoBehaviour
 
     void Init()
     {
-        PlayerPrefs.SetInt("MyData", 1);
+        PlayerPrefs.SetInt("MyData", 1); // MyData 키값을 1로 설정
 
         foreach (Achive achive in achives) { // foreach문 한방에 모든 업적을 초기화 시켰다
             PlayerPrefs.SetInt(achive.ToString(), 0);
@@ -58,10 +58,7 @@ public class AchieveManager : MonoBehaviour
         bool isAchive = false;
 
         switch (achive) {
-            case Achive.UnlockPotato:
-                isAchive = GameManager.instance.kill >= 10;
-                break;
-            case Achive.UnlockBean:
+            case Achive.UnlockP1:
                 isAchive = GameManager.instance.gameTime == GameManager.instance.maxGameTime;
                 break;
         }
@@ -73,7 +70,6 @@ public class AchieveManager : MonoBehaviour
                 bool isActive = index == (int)achive; // 알림 창의 자식 오브젝트를 순회하면서 순번이 맞으면 활성화
                 uiNotice.transform.GetChild(index).gameObject.SetActive(isActive);
             }
-
             StartCoroutine(NoticeRoutine());
         }
     }
@@ -84,7 +80,6 @@ public class AchieveManager : MonoBehaviour
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
 
         yield return wait;
-
         uiNotice.SetActive(false);
     }
 }

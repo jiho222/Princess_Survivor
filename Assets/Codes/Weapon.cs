@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -9,6 +10,8 @@ public class Weapon : MonoBehaviour
     public float damage;
     public int count;
     public float speed;
+
+    public SpriteRenderer spriter;
 
     float timer;
     Player player;
@@ -24,10 +27,18 @@ public class Weapon : MonoBehaviour
             return;
             
         switch (id) {
-            case 0:
+            case 0: // 왕관
                 transform.Rotate(Vector3.back * speed * Time.deltaTime);
                 break;
-            default:
+            case 5: // 방망이
+                timer += Time.deltaTime;
+
+                if (timer > speed) {
+                    timer = 0f;
+                    Swing();
+                }
+                break;
+            default: // 마법지팡이
                 timer += Time.deltaTime;
 
                 if (timer > speed) {
@@ -64,6 +75,7 @@ public class Weapon : MonoBehaviour
         // 프리펩 아이디는 풀링 매니저의 변수에서 찾아서 초기화
         // 스크립트블 오브젝트의 독립성을 위해서 인덱스가 아닌 프리펩으로 설정
         for (int index=0; index < GameManager.instance.pool.prefabs.Length; index++) {
+            // projectile 프리펩이 풀링 매니저의 프리펩과 같으면 인덱스를 저장
             if (data.projectile == GameManager.instance.pool.prefabs[index]) {
                 prefabId = index;
                 break;
@@ -75,13 +87,17 @@ public class Weapon : MonoBehaviour
                 speed = 150 * Character.WeaponSpeed;
                 Batch();
                 break;
+            case 5:
+                speed = 1.0f * Character.WeaponRate;
+                break;
+                
             default:
                 speed = 0.5f * Character.WeaponRate;
                 break;
         }
 
         // Hand Set
-        Hand hand = player.hands[(int)data.itemType];
+        Hand hand = player.hands[(int)data.itemType]; // Player.cs의 Hand 배열에 접근하여 hand에 할당, data.itemType은 ItemData.cs의 열거형에서 가져옴
         hand.spriter.sprite = data.hand;
         hand.gameObject.SetActive(true);
 
@@ -89,7 +105,7 @@ public class Weapon : MonoBehaviour
             // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수
     }
 
-    void Batch() // 근접무기 설정
+    void Batch() // 빙빙도는무기 설정
     {
         for (int index = 0; index < count; index++) {
             Transform bullet;
@@ -101,7 +117,7 @@ public class Weapon : MonoBehaviour
                 bullet = GameManager.instance.pool.Get(prefabId).transform;
             }
              
-            bullet.parent = transform; // pool이 부모인 상태에서 player의 자식으로 들어감
+            bullet.parent = transform; // pool 자식인 상태에서 player의 자식으로 됨
 
             bullet.localPosition = Vector3.zero;
             bullet.localRotation = Quaternion.identity;
@@ -129,4 +145,54 @@ public class Weapon : MonoBehaviour
 
         // AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
     }
+
+    void Swing()
+    {
+        Transform bat = GameManager.instance.pool.Get(prefabId).transform;
+        bat.parent = transform; // 플레이어의 자식으로 설정
+        bat.localPosition = Vector3.up * 2.5f; // 플레이어 위로 이동
+        bat.localRotation = Quaternion.Euler(0, 0, 45f); // 초기 각도 45도로 설정
+
+        bat.gameObject.SetActive(true); // 방망이 활성화
+
+        bat.GetComponent<Bullet>().Init(damage, -100, Vector3.zero); // -100 is Infinity Per.
+
+        // Player 의 FlipX 여부에 따라 방향을 결정
+        if (player.spriter.flipX)
+        {
+            // 플레이어가 좌측을 바라볼 때
+            StartCoroutine(SwingRoutine(bat, 45f, 135f, 180f)); // 반시계 방향 휘두르기
+        }
+        else
+        {
+            // 플레이어가 우측을 바라볼 때
+            StartCoroutine(SwingRoutine(bat, -45f, -135f, 180f)); // 시계 방향 휘두르기
+        }
+    }
+
+    IEnumerator SwingRoutine(Transform bat, float startAngle, float endAngle, float swingSpeed)
+    {
+        float currentAngle = startAngle;
+        bool isSwingingClockwise = startAngle > endAngle;
+
+        while ((isSwingingClockwise && currentAngle > endAngle) || (!isSwingingClockwise && currentAngle < endAngle))
+    {
+        currentAngle += (isSwingingClockwise ? -1 : 1) * swingSpeed * Time.deltaTime;
+
+        // while (currentAngle > endAngle)
+        // {
+        //     currentAngle -= swingSpeed * Time.deltaTime;
+
+            // 방망이의 위치와 회전을 함께 업데이트
+            bat.position = transform.position + Quaternion.Euler(0, 0, currentAngle) * Vector3.up * 2.5f;
+            bat.rotation = transform.rotation * Quaternion.Euler(0, 0, currentAngle);
+
+            yield return null; // 한 프레임 대기
+        }
+
+        bat.localPosition = Vector3.up * 2.5f; // 초기 위치로 되돌림
+        bat.localRotation = Quaternion.Euler(0, 0, 45f); // 초기 각도로 되돌림
+        bat.gameObject.SetActive(false); // 방망이를 비활성화하여 오브젝트 풀로 반환
+    }
+
 }
