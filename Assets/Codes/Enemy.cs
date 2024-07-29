@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     void LateUpdate() // 좌우반전
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.isLive || !isLive)
             return;
         spriter.flipX = target.position.x < rigid.position.x;
     }
@@ -61,6 +61,30 @@ public class Enemy : MonoBehaviour
         spriter.sortingOrder = 3;
         anim.SetBool("isDead", false);
         health = maxhealth;
+
+        // ExpPoint 초기화 또는 생성
+        InitializeExpPoint();
+    }
+
+    void InitializeExpPoint()
+    {
+        Transform expPointTransform = transform.Find("ExpPoint");
+        if (expPointTransform == null)
+        {
+            GameObject exp = GameManager.instance.pool.Get(5);
+            if (exp != null)
+            {
+                exp.transform.parent = transform;
+                exp.transform.localPosition = Vector3.zero;
+                exp.SetActive(false);
+                exp.name = "ExpPoint";
+            }
+        }
+        else
+        {
+            expPointTransform.gameObject.SetActive(false);
+            expPointTransform.localPosition = Vector3.zero;
+        }
     }
 
     public void Init(SpawnData data) // Spawner에서 지정해준 SpawnData를 받아야함
@@ -76,27 +100,55 @@ public class Enemy : MonoBehaviour
         if (!collision.CompareTag("Bullet") || !isLive)
             return;
 
-        health -= collision.GetComponent<Bullet>().damage;
-        StartCoroutine(KnockBack());
+        Bullet bullet = collision.GetComponent<Bullet>();
+        Mirror mirror = collision.GetComponent<Mirror>();
 
-        if (health > 0) {
-            anim.SetTrigger("isHit");
-            // AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+        if (bullet != null)
+        {
+            health -= bullet.damage;
+            DamageNumberController.instance.SpawnDamage(bullet.damage, transform.position);
+            if (health > 0)
+            {
+                anim.SetTrigger("isHit");
+                StartCoroutine(KnockBack());
+                
+                // AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            }
+            else
+            {
+                Die();
+            }
         }
-        else {
-            isLive = false;
-            coll.enabled = false;
-            rigid.simulated = false;
-            spriter.sortingOrder = 2;
-            anim.SetBool("isDead", true);
-            GameManager.instance.kill++;
-            StartCoroutine(ExpDrop());
-
-            // if (GameManager.instance.isLive)
-            //     AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+      else if (mirror != null)
+        {
+            health -= mirror.damage;
+            DamageNumberController.instance.SpawnDamage(mirror.damage, transform.position);
+            if (health > 0)
+            {
+                anim.SetTrigger("isHit");
+                // AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+            }
+            else
+            {
+                Die();
+            }
         }
+    }
+        
+    void Die () 
+    {
+        isLive = false;
+        coll.enabled = false;
+        rigid.simulated = false;
+        spriter.sortingOrder = 2;
+        anim.SetBool("isDead", true);
+        GameManager.instance.kill++;
+        StartCoroutine(ExpDrop());
 
-        DamageNumberController.instance.SpawnDamage(collision.GetComponent<Bullet>().damage, transform.position);
+        // if (GameManager.instance.isLive)
+        //     AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+
+        
     }
 
     IEnumerator KnockBack()
@@ -109,9 +161,9 @@ public class Enemy : MonoBehaviour
 
     IEnumerator ExpDrop()
     {
-        GameObject exppoint = transform.Find("ExpPoint").gameObject;
-        exppoint.transform.SetParent(null);
-        exppoint.SetActive(true);
+        GameObject expPoint = transform.Find("ExpPoint").gameObject;
+        expPoint.transform.SetParent(null);
+        expPoint.SetActive(true);
         yield return new WaitForSeconds(2); // 2초 기다림
         gameObject.SetActive(false);
     }

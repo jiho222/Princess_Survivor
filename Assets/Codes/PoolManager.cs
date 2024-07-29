@@ -21,6 +21,13 @@ public class PoolManager : MonoBehaviour
 
     public GameObject Get(int index) // 비활성화된 오브젝트 접근해서 할당
     {
+        // 5번 인덱스의 경우 바로 Instantiate
+        if (index == 5)
+        {
+            GameObject expPoint = Instantiate(prefabs[index], transform);
+            return expPoint;
+        }
+
         GameObject select = null;
 
         // ... 선택한 풀의 놀고 있는(비활성화 된) 게임 오브젝트 접근

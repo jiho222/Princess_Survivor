@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Bullet
   - Exp
+  - MirrorArea
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,7 @@ public class Weapon : MonoBehaviour
 
     float timer;
     Player player;
+    Rigidbody2D rigid;
 
     void Awake()
     {
@@ -38,6 +39,8 @@ public class Weapon : MonoBehaviour
                     Swing();
                 }
                 break;
+            case 6: // 거울
+                break;
             default: // 마법지팡이
                 timer += Time.deltaTime;
 
@@ -56,6 +59,8 @@ public class Weapon : MonoBehaviour
 
         if (id ==0)
             Batch();
+        else if (id ==6)
+            Mirror();
 
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
     }
@@ -90,7 +95,9 @@ public class Weapon : MonoBehaviour
             case 5:
                 speed = 1.0f * Character.WeaponRate;
                 break;
-                
+            case 6:
+                Mirror();
+                break;                
             default:
                 speed = 0.5f * Character.WeaponRate;
                 break;
@@ -179,10 +186,6 @@ public class Weapon : MonoBehaviour
     {
         currentAngle += (isSwingingClockwise ? -1 : 1) * swingSpeed * Time.deltaTime;
 
-        // while (currentAngle > endAngle)
-        // {
-        //     currentAngle -= swingSpeed * Time.deltaTime;
-
             // 방망이의 위치와 회전을 함께 업데이트
             bat.position = transform.position + Quaternion.Euler(0, 0, currentAngle) * Vector3.up * 2.5f;
             bat.rotation = transform.rotation * Quaternion.Euler(0, 0, currentAngle);
@@ -195,4 +198,18 @@ public class Weapon : MonoBehaviour
         bat.gameObject.SetActive(false); // 방망이를 비활성화하여 오브젝트 풀로 반환
     }
 
+    void Mirror()
+    {
+        // 발사방향계산
+        float randomAngle = Random.Range(0f, 360f);
+        Vector3 dir = Quaternion.Euler(0, 0, randomAngle) * Vector3.up;
+        dir = dir.normalized;
+        // 위치, 회전 결정, Mirror스크립트에게 전달
+        Transform mirror = GameManager.instance.pool.Get(prefabId).transform;
+        mirror.position = transform.position;
+        mirror.rotation = Quaternion.FromToRotation(Vector3.up, dir); // FromToRotation: 지정된 축을 중심으로 목표를 향해 회전하는 함수
+        mirror.GetComponent<Mirror>().Init(damage, count, dir);
+
+        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+    }
 }

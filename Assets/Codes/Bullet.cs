@@ -19,14 +19,14 @@ public class Bullet : MonoBehaviour
         this.damage = damage; // 왼쪽: bullet 안의 damage, 오른쪽: 매개변수로 받은 damage
         this.per = per;
 
-        if (per >= 0) {
-            rigid.velocity = dir * 15f; // 총알 발사
-        }
+            if (per >= 0) {
+                rigid.velocity = dir * 15f;
+         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision) // 맞을때마다 per을 감소시킨다
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Enemy") || per == -100) // Enemy에 닿은게 아니거나 per이 -100(근접무기)가 아닐경우에
+        if (!collision.CompareTag("Enemy") || per == -100)
             return;
 
         per --;

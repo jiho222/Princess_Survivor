@@ -10,11 +10,6 @@ public class ExpPickUp : MonoBehaviour
     public float timeBetweenChecks = .2f;
     public float checkCounter;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if(movingToPlayer == true)
