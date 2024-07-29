@@ -14,16 +14,6 @@ public class DamageNumberController : MonoBehaviour
     public DamageNumber numberToSpawn;
     public Transform numberCanvas;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
-
     public void SpawnDamage(float damageAmount, Vector3 location)
     {
         int rounded = Mathf.RoundToInt(damageAmount);

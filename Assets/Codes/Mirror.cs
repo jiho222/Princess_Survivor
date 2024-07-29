@@ -14,6 +14,8 @@ public class Mirror : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         player = GameManager.instance.player;
+        // 파티클 시스템 재생
+        GetComponent<ParticleSystem>().Play();
     }
 
     public void Init(float damage, int per, Vector3 dir)
