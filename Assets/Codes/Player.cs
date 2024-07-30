@@ -11,12 +11,11 @@ public class Player : MonoBehaviour
     public Hand[] hands;
     public RuntimeAnimatorController[] animCon;
 
-    public float pickupRange = 10f;
+    public float pickupRange;
 
     public SpriteRenderer spriter;
 
     Rigidbody2D rigid;
-    
     Animator anim;
 
     void Awake()
@@ -65,14 +64,57 @@ public class Player : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
-        GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
+            anim.SetTrigger("isHit");
+
+            if ( GameManager.instance.health < 0)
+            {
+                for (int index = 2; index < transform.childCount; index++)
+                {
+                    transform.GetChild(index).gameObject.SetActive(false);
+                }
+                anim.SetTrigger("isDead");
+                GameManager.instance.GameOver();
+            }
+        }
+    }
+
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if (!GameManager.instance.isLive)
+    //         return;
+    
+    //     if (collision.CompareTag("BossBullet"))
+    //     {
+    //         Debug.Log("플레이어가 총알에 닿았다");
+    //         GameManager.instance.health -= 20f;
+    //         anim.SetTrigger("isHit");
+
+    //         if (GameManager.instance.health < 0)
+    //         {
+    //             for (int index = 2; index < transform.childCount; index++)
+    //             {
+    //                 transform.GetChild(index).gameObject.SetActive(false);
+    //             }
+    //             anim.SetTrigger("isDead");
+    //             GameManager.instance.GameOver();
+    //         }
+    //     }
+    // }
+
+    public void TakeDamage()
+    {
+        GameManager.instance.health -= 20f;
         anim.SetTrigger("isHit");
 
-        if ( GameManager.instance.health < 0) {
-            for (int index = 2; index < transform.childCount; index++) {
+        if (GameManager.instance.health < 0)
+        {
+            for (int index = 2; index < transform.childCount; index++)
+            {
                 transform.GetChild(index).gameObject.SetActive(false);
             }
-
             anim.SetTrigger("isDead");
             GameManager.instance.GameOver();
         }

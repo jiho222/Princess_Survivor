@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public RuntimeAnimatorController[] animCon;
     public Rigidbody2D target;
 
-    bool isLive;
+    public bool isLive;
 
     Rigidbody2D rigid;
     Collider2D coll;
@@ -147,8 +147,6 @@ public class Enemy : MonoBehaviour
 
         // if (GameManager.instance.isLive)
         //     AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
-
-        
     }
 
     IEnumerator KnockBack()

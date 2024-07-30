@@ -38,7 +38,6 @@ public class Spawner : MonoBehaviour
         GameObject enemy = GameManager.instance.pool.Get(0);
         enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position; // 0번째는 부모 오브젝트이므로 1부터 시작
         enemy.GetComponent<Enemy>().Init(spawnData[level]);
-
     }
 }
 

@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Exp
   - MirrorArea
+  - BossBullet
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - BossBullet
   - 
   - 
   - 
