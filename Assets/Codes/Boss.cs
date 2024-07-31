@@ -13,6 +13,8 @@ public class Boss : Enemy
         if (!GameManager.instance.isLive || !isLive)
             return;
 
+        
+
         // 플레이어가 사정거리 내에 있는지 확인
         float distanceToPlayer = Vector2.Distance(target.transform.position, transform.position);
         if (distanceToPlayer <= shootingRange)

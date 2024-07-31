@@ -41,7 +41,7 @@ public class RouletteManager : MonoBehaviour
         {
             if (rotateSpeed > 1f)
             {
-                RoulettePlate.transform.Rotate(0, 0, rotateSpeed * Time.unscaledDeltaTime);
+                RoulettePlate.transform.Rotate(0, 0, -rotateSpeed * Time.unscaledDeltaTime);
                 rotateSpeed = Mathf.Lerp(rotateSpeed, 0, Time.unscaledDeltaTime * 0.7f);
             }
             else

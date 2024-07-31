@@ -7,6 +7,7 @@ public class LevelUp : MonoBehaviour
     RectTransform rect;
     Item[] items;
     List<Weapon> filteredWeapons = new List<Weapon>();
+    public List<int> availableIndices = new List<int>();
 
     void Awake()
     {
@@ -34,6 +35,11 @@ public class LevelUp : MonoBehaviour
     public void Select(int index)
     {
         items[index].OnClick();
+    }
+
+    public List<int> GetAvailableIndices()
+    {
+        return new List<int>(availableIndices); // availableIndices를 반환
     }
 
     void Next()
@@ -85,7 +91,7 @@ public class LevelUp : MonoBehaviour
         }
 
         // 3. 가능한 아이템 인덱스 리스트 생성
-        List<int> availableIndices = new List<int>();
+        availableIndices.Clear();
 
         for (int i = 0; i < items.Length; i++)
         {
