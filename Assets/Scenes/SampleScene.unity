@@ -56863,9 +56863,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1132823861}
-        m_TargetAssemblyTypeName: RouletteManager, Assembly-CSharp
-        m_MethodName: StartRoulette
+      - m_Target: {fileID: 916357030}
+        m_TargetAssemblyTypeName: GiveItemManager, Assembly-CSharp
+        m_MethodName: OnDisable
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

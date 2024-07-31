@@ -104,9 +104,18 @@ public class Weapon : MonoBehaviour
         }
 
         // Hand Set
-        Hand hand = player.hands[(int)data.itemType]; // Player.cs의 Hand 배열에 접근하여 hand에 할당, data.itemType은 ItemData.cs의 열거형에서 가져옴
-        hand.spriter.sprite = data.hand;
-        hand.gameObject.SetActive(true);
+        if (id == 1)
+        {
+            Hand hand = player.hands[1]; // Hand 1에 적용
+            hand.spriter.sprite = data.hand;
+            hand.gameObject.SetActive(true);
+        }
+        else if (id == 5)
+        {
+            Hand hand = player.hands[0]; // Hand 0에 적용
+            hand.spriter.sprite = data.hand;
+            hand.gameObject.SetActive(true);
+        }
 
         player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver);
             // BroadcastMessage 는 특정 함수 호출을 모든 자식에게 방송하는 함수

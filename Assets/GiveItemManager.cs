@@ -18,7 +18,7 @@ public class GiveItemManager : MonoBehaviour
 
 
 
-    void OnDisable()
+    public void OnDisable()
     {
         GameManager.instance.Resume();
         gameObject.SetActive(false);
