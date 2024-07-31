@@ -59,12 +59,6 @@ public class LevelUp : MonoBehaviour
             }
         }
 
-        // Debug: 필터링된 Weapon의 이름과 활성화 상태 출력
-        foreach (Weapon weapon in filteredWeapons)
-        {
-            Debug.Log("Filtered Weapon Name: " + weapon.name + ", Active: " + weapon.gameObject.activeSelf);
-        }
-
         // 1. 모든 아이템 비활성화
         foreach (Item item in items)
         {

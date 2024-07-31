@@ -18,8 +18,6 @@ public class GiveItemManager : MonoBehaviour
     {
         // LevelUp의 availableIndices를 가져온다
         List<int> availableIndices = levelUp.GetAvailableIndices();
-        Debug.Log("availableIndices: " + availableIndices.Count);
-        Debug.Log("closetIndex: " + closetIndex);
 
         // 랜덤으로 선택된 아이템들의 정보를 저장할 리스트
         List<int> selectedIndices = new List<int>();
@@ -36,8 +34,6 @@ public class GiveItemManager : MonoBehaviour
             // 아이템 선택 및 활성화
             levelUp.Select(selectedIndex);
             availableIndices.RemoveAt(randomIndex); // 중복 방지
-
-            Debug.Log("selectedIndices: " + selectedIndex);
         }
 
         // 선택된 아이템들에 대한 UI 업데이트

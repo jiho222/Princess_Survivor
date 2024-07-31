@@ -159,19 +159,17 @@ public class GameManager : MonoBehaviour
 
     void BossSpawn()
     {
-        // 5분(300초)일 때 boss1을 스폰, 단 한 번만
-        if (GameManager.instance.gameTime >= 5f && !boss1Spawned)
+        // 2분(120초)일 때 boss1을 스폰, 단 한 번만
+        if (GameManager.instance.gameTime >= 120f && !boss1Spawned)
         {
-            Debug.Log("Boss1 Spawned");
             boss1.SetActive(true);
             boss1.transform.position = GameManager.instance.player.transform.position + Vector3.up * 8f;
             boss1Spawned = true; // Boss1이 이미 스폰되었음을 기록
         }
 
-        // 10분(600초)일 때 boss2를 스폰, 단 한 번만
-        if (GameManager.instance.gameTime >= 600f && !boss2Spawned)
+        // 4분(240초)일 때 boss2를 스폰, 단 한 번만
+        if (GameManager.instance.gameTime >= 240f && !boss2Spawned)
         {
-            Debug.Log("Boss2 Spawned");
             boss2.SetActive(true);
             boss2.transform.position = GameManager.instance.player.transform.position + Vector3.up * 8f;
             boss2Spawned = true; // Boss2가 이미 스폰되었음을 기록

@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            GameManager.instance.health -= Time.deltaTime * 10; // 프레임마다 적절한 피격 데미지 계산
+            GameManager.instance.health -= Time.deltaTime * 20; // 프레임마다 적절한 피격 데미지 계산
             anim.SetTrigger("isHit");
 
             if ( GameManager.instance.health < 0)

@@ -80,7 +80,6 @@ public class RouletteManager : MonoBehaviour
         if (closetIndex != -1)
         {
             ResultIndexList.Add(closetIndex);
-            Debug.Log("Closest Slot: " + closetIndex);
         }
     }
 
