@@ -6,7 +6,6 @@ public class Boss : Enemy
     public float shootingRange;
     public float shootCooldown;
     public float lastShootTime;
-
     public GameObject bossBullet;
 
     void Update()
