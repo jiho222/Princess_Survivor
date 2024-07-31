@@ -59,8 +59,7 @@ public class GameManager : MonoBehaviour
 
         Resume(); // 게임 시작 시 Time.timeScale = 1
 
-        // AudioManager.instance.PlayBgm(true);
-        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        AudioManager.instance.PlayBgm(true);
 
     }
 
@@ -79,8 +78,8 @@ public class GameManager : MonoBehaviour
         uiResult.Lose();
         Stop();
 
-        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Lose);
-        // AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Dead);
+        AudioManager.instance.PlayBgm(false);
     }
     
     public void GameVictory()
@@ -99,8 +98,8 @@ public class GameManager : MonoBehaviour
         uiResult.Win();
         Stop();
 
-        // AudioManager.instance.PlayBgm(false);
-        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
+        AudioManager.instance.PlayBgm(false);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Win);
     }
 
 
@@ -114,7 +113,7 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    void Update()
+    void Update() 
     {
         if (!isLive)
             return;
@@ -140,6 +139,7 @@ public class GameManager : MonoBehaviour
             level++;
             exp = 0;
             uiLevelUp.Show();
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.LevelUp);
         }
     }
 

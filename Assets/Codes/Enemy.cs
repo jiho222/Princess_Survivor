@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
                 anim.SetTrigger("isHit");
                 StartCoroutine(KnockBack());
                 
-                // AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
+                AudioManager.instance.PlaySfx(AudioManager.Sfx.Hit);
             }
             else
             {

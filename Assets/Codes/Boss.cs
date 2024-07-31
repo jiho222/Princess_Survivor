@@ -34,7 +34,7 @@ public class Boss : Enemy
         GameObject bbullet = Instantiate(bossBullet, transform);
         bbullet.transform.position = transform.position;
         bbullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bbullet.GetComponent<Rigidbody2D>().velocity = dir * 10f;
+        bbullet.GetComponent<Rigidbody2D>().velocity = dir * 8f;
     }
 
     protected override void Die()

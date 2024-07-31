@@ -159,7 +159,7 @@ public class Weapon : MonoBehaviour
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, dir); // FromToRotation: 지정된 축을 중심으로 목표를 향해 회전하는 함수
         bullet.GetComponent<Bullet>().Init(damage, count, dir);
 
-        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Magic);
     }
 
     void Swing()
@@ -205,6 +205,8 @@ public class Weapon : MonoBehaviour
         bat.localPosition = Vector3.up * 2.5f; // 초기 위치로 되돌림
         bat.localRotation = Quaternion.Euler(0, 0, 45f); // 초기 각도로 되돌림
         bat.gameObject.SetActive(false); // 방망이를 비활성화하여 오브젝트 풀로 반환
+
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Bat);
     }
 
     void Mirror()
@@ -219,6 +221,6 @@ public class Weapon : MonoBehaviour
         mirror.rotation = Quaternion.FromToRotation(Vector3.up, dir); // FromToRotation: 지정된 축을 중심으로 목표를 향해 회전하는 함수
         mirror.GetComponent<Mirror>().Init(damage, count, dir);
 
-        // AudioManager.instance.PlaySfx(AudioManager.Sfx.Range);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Light);
     }
 }

@@ -56,9 +56,10 @@ public class RouletteManager : MonoBehaviour
     public void StartRoulette()
     {
         float randomSpd = Random.Range(1.0f, 5.0f);
-        rotateSpeed = 10000f * randomSpd;
+        rotateSpeed = 1000f * randomSpd;
         isSpinning = true;
         spinButton.interactable = false;
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Roulette1);
     }
 
     void Result()

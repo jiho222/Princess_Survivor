@@ -38,6 +38,7 @@ public class GiveItemManager : MonoBehaviour
 
         // 선택된 아이템들에 대한 UI 업데이트
         UpdateItemPanel(selectedIndices);
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Roulette2);
     }
 
     void UpdateItemPanel(List<int> selectedIndices)
