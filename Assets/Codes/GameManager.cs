@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public bool isLive;
     public float gameTime;
     public float maxGameTime;
+    public float bossSpawnTime;
     [Header("# Player Info")]
     public int playerId;
     public float health;

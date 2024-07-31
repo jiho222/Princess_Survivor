@@ -135,7 +135,7 @@ public class Enemy : MonoBehaviour
         }
     }
         
-    void Die () 
+    protected virtual void Die () 
     {
         isLive = false;
         coll.enabled = false;

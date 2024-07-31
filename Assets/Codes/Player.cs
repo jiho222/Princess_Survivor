@@ -81,29 +81,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    // void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     if (!GameManager.instance.isLive)
-    //         return;
-    
-    //     if (collision.CompareTag("BossBullet"))
-    //     {
-    //         Debug.Log("플레이어가 총알에 닿았다");
-    //         GameManager.instance.health -= 20f;
-    //         anim.SetTrigger("isHit");
-
-    //         if (GameManager.instance.health < 0)
-    //         {
-    //             for (int index = 2; index < transform.childCount; index++)
-    //             {
-    //                 transform.GetChild(index).gameObject.SetActive(false);
-    //             }
-    //             anim.SetTrigger("isDead");
-    //             GameManager.instance.GameOver();
-    //         }
-    //     }
-    // }
-
     public void TakeDamage()
     {
         GameManager.instance.health -= 20f;

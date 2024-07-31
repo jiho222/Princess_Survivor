@@ -35,4 +35,19 @@ public class Boss : Enemy
         bbullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
         bbullet.GetComponent<Rigidbody2D>().velocity = dir * 10f;
     }
+
+    protected override void Die()
+    {
+        base.Die();
+        StartCoroutine(DestroyAndActivateBox());
+    }
+
+    IEnumerator DestroyAndActivateBox()
+    {
+        GameObject box = transform.Find("Box").gameObject; // 박스 아이템 찾기
+        box.transform.SetParent(null); // 아이템의 부모를 null로 설정하여 분리
+        box.SetActive(true); // 아이템 활성화
+        yield return new WaitForSeconds(0.1f); // 한 프레임 대기하여 치킨 활성화가 반영되도록 함
+        Destroy(gameObject); // 현재 오브젝트 삭제
+    }
 }
