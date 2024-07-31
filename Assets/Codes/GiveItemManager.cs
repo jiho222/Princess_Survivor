@@ -66,8 +66,21 @@ public class GiveItemManager : MonoBehaviour
         }
     }
 
+    // 상태 초기화 메서드 추가
+    void ResetState()
+    {
+        // 기존의 아이템 UI를 모두 비활성화
+        foreach (GameObject slotItem in slotItems)
+        {
+            slotItem.SetActive(false);
+        }
+        closetIndex = 0; // 인덱스를 초기화
+    }
+
     public void OnDisable()
     {
+        // 상태 초기화
+        ResetState();
         GameManager.instance.Resume();
         gameObject.SetActive(false);
     }
