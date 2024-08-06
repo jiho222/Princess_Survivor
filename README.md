@@ -19,6 +19,9 @@
 ## 플레이 영상
 #### https://www.youtube.com/watch?v=psP5w155Cus&t=270s
 
+## 플레이 링크
+#### https://drive.google.com/file/d/1fFzd7R1TSlvm4kv9TPOyZPqCGbAA_0PN/view?usp=drive_link
+
 ## 개발목적
 #### 이것은 뱀서라이크 장르의 게임을 만들어보고자 해서 탄생한 게임입니다.
 #### (뱀서라이크는 뱀파이어 서바이벌과 비슷한 게임으로, 사방에서 몰려오는 적들을 잡으며 살아남는것이 목표인 게임)
