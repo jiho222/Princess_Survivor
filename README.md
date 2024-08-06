@@ -25,7 +25,7 @@
 #### 유튜브에 있는 ‘골드메탈’님의 강의(https://www.youtube.com/watch?v=MmW166cHj54&list=PLO-mt5Iu5TeZF8xMHqtT_DhAPKmjF6i3x)를 참고하였습니다.
 
 ## 
-### ㅇ 강의에서 기본적으로 제공된 기능들
+### ㅇ 유튜브 강의에서 기본적으로 제공된 기능들
 #### - 2D 기본 이동
 #### - 무한 맵
 #### - 프리펩 관리
